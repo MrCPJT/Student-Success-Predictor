@@ -112,7 +112,7 @@ With the final model trained and saved, we now want to serve the model using som
 
 `predict.py` uses `pickle` to load and read `model.bin` and `Flask` to initialise the webservice (using the POST method). Being a Windows user, `waitress`, a production-quality pure-Python WSGI server, is then used to serve the model using:
 
->`waitress -serve --listen=0.0.0.0:2222 predict:app`
+`waitress -serve --listen=0.0.0.0:2222 predict:app`
 
 From here, `predict-test.py` can be run (utilising the `requests` package), to test the webservice (see serve_proof.png at the end of this file for a demonstration).
 
@@ -124,7 +124,7 @@ Having trained and served our final model, we now want to contain the entire pro
 
 This project uses `pipenv` to create and manage a virtual environment. Specific dependencies as well as versions of python can then be installed to the virtual environment using `pipenv install`, and are documented in `Pipfile` / `Pipfile.lock`.
 
->`Pipfile` contains the dependencies and their respective versions necessary for running the service.
+`Pipfile` contains the dependencies and their respective versions necessary for running the service.
 
 Now that the project is contained in a virtual environment, we want to isolate the environment using `Docker`. Isolation is important to avoid conflict with other running environments/services.
 
@@ -132,11 +132,11 @@ Now that the project is contained in a virtual environment, we want to isolate t
 
 Using the `Dockerfile` in this repo, we can build the Docker image by doing:
 
->`docker build -t student-success-serving`
+`docker build -t student-success-serving`
 
 And run the image by using:
 
->`docker run -it --rm -p 2222:2222 student-success-serving`
+`docker run -it --rm -p 2222:2222 student-success-serving`
 
 The following images are demonstrations of building and running Docker on my local machine (NOTE: I found that Docker Desktop needed to be running in order to use Docker successfully).
 
@@ -156,21 +156,21 @@ The final step is to deploy our Docker image to a cloud service and for this par
 
 From here, we can use the EB CLI to initialise a cloud service from the command line. In our virtual environment we first want to install a dev dependency of the EB CLI using:
 
->`pipenv install awsebcli --dev`
+`pipenv install awsebcli --dev`
 
 Now, we can initialise the EB application, specifying the platform, the region of our service and the service name (NOTE: Your region is most likely different to my own):
 
->`eb init -p docker -r eu-west-2 student-success-serving`
+`eb init -p docker -r eu-west-2 student-success-serving`
 
 **NOTE: At this stage you will be instructed to input your `access_key_ID` and `secret_access_key` (if you haven't previously done so).**
 
 This generates a `config.yml` file which we can inspect the application's details before testing locally using:
 
->`eb local run --port 2222`
+`eb local run --port 2222`
 
 **NOTE: In `config.yml` I had to change `default_platform: Docker` to `default_platform: Docker running on 64bit Amazon Linux 2023`, in order to get the service to run locally. Finally, we can host the EB service on the cloud by running (This make take some time: ~5 minutes):**
 
->`eb create student-success-serving`
+`eb create student-success-serving`
 
 And we're done! The service is now deployed to the cloud and accessible from the AWS EB dashboard and the URL provided in the command line (for me this was: http://student-success-serving.eba-yzdssnnc.eu-west-2.elasticbeanstalk.com/predict, but note that I have since terminated the service to save money).
 
