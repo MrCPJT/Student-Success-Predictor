@@ -140,9 +140,9 @@ And run the image by using:
 
 The following images are demonstrations of building and running Docker on my local machine (NOTE: I found that Docker Desktop needed to be running in order to use Docker successfully).
 
-![Building Docker Image](Proof\docker_build_proof.png "Demonstration of building Docker container image")
+![Building Docker Image](Proof/docker_build_proof.png "Demonstration of building Docker container image")
 
-![Running Docker Image](Proof\docker_run_proof.png "Demonstration of running Docker container image")  
+![Running Docker Image](Proof/docker_run_proof.png "Demonstration of running Docker container image")  
 
 <a name="cloud-deployment"></a>
 
@@ -176,7 +176,7 @@ And we're done! The service is now deployed to the cloud and accessible from the
 
 The following two images demonstrate me calling the cloud service from my local command line and my AWS EB dashboard recording that request, respectively.
 
-![Calling Served Model](Proof\serve_proof.png "Demonstration of served model using waitress")
+![Calling Served Model](Proof/serve_proof.png "Demonstration of served model using waitress")
 
-![Deployment Dashboard](Proof\AWS_deploy_proof.png "AWS deployment dashboard")
+![Deployment Dashboard](Proof/AWS_deploy_proof.png "AWS deployment dashboard")
 
